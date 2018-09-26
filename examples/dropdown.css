@@ -1,0 +1,19 @@
+body{
+    font-size: 15px;
+}
+.drop-down-search-container{
+    padding: 10px;
+}
+
+.action-item{
+    font-size: 13px;
+    color: rgba(0,0,0,0.67);
+    background: #F8F7F7;
+    padding:11px 15px;
+    cursor: pointer;
+}
+.group-item{
+    font-size: 16px;
+    color: #0071CE;
+    padding:11px 15px;
+}
