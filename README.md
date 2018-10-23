@@ -20,7 +20,7 @@ Using the above generic we can model any interaction, we can compose and build c
 Please checkout [documentation](https://agradipyahoo.github.io)
 
 ```javascript
-npm install -s smart-components
+npm install -s material-smart-components
 ```
 
 Please feel free to reach out to me.
