@@ -23,7 +23,7 @@ Please checkout [documentation](https://github.com/agradipyahoo/smart-components
 npm install -s smart-components
 ```
 
-Feel free to reach out any doubt.
+Feel free to reach out @agradip2004.
 
 
 
