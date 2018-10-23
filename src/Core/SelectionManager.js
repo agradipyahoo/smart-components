@@ -48,6 +48,10 @@ export default class SelectionManager extends EventEmitter {
     }
   }
 
+  isAllSelected(options){
+    return Object.keys(this._dataStoreIndex).length === options.length;
+  }
+
   deselect(deselectedItem) {
     let { _dataStoreIndex, _idAttribute } = this;
     if (this.validateItem(deselectedItem) && this.isSelected(deselectedItem)) {
@@ -67,10 +71,19 @@ export default class SelectionManager extends EventEmitter {
     }
   }
 
-  clear() {
+  clearAndSelect(selectedItem){
     if (!this.isEmpty()) {
       this._dataStoreIndex = {};
-      this.triggerChange();
+    }
+    this.select(selectedItem);
+  }
+
+  clear(silent = false) {
+    if (!this.isEmpty()) {
+      this._dataStoreIndex = {};
+      if(!silent){
+        this.triggerChange();
+      }
     }
   }
 

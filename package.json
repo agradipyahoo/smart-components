@@ -1,5 +1,5 @@
 {
-  "name": "smart-components",
+  "name": "material-smart-components",
   "version": "1.0.0",
   "description": "Smart compontents",
   "main": "lib/index.js",
@@ -23,7 +23,8 @@
   "license": "ISC",
   "dependencies": {
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "styled-components": "^4.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

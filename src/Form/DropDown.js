@@ -100,7 +100,17 @@ const SearchIconContainer = styled.div `
 
 
 class Dropdown extends SelectionFormElement {
-  _handlePopoverClose = () => {
+  constructor(props) {
+    super(props);
+    this.state.query = '';
+    this.state.anchorEl = null;
+    //override selection manager instance.
+    if(this.props.selectionManager){
+      this.selectionManager = this.props.selectionManager
+      this.changeSubscription = this.selectionManager.on('change', this.onChange.bind(this));
+    }
+  }
+   _handlePopoverClose = () => {
     this.setState({ anchorEl: null });
   };
   handleClick = event => {
@@ -121,12 +131,6 @@ class Dropdown extends SelectionFormElement {
     });
   };
 
-  constructor(props) {
-    super(props);
-    this.state.query = '';
-    this.state.anchorEl = null;
-  }
-
   onChangeUpdates(value) {
     if (!this.multiSelect) {
       this._handlePopoverClose();
@@ -134,7 +138,7 @@ class Dropdown extends SelectionFormElement {
   }
 
   getPlaceHolderContent() {
-    return <div className={'smart-selection-placeholder'}> {this.props.noSelectionLabel}</div>;
+    return <div className="smart-selection-placeholder"> {this.props.noSelectionLabel}</div>;
   }
 
   getSummaryText() {
@@ -189,13 +193,13 @@ class Dropdown extends SelectionFormElement {
     dropDownSummary = dropDownSummary.bind(this);
     const selectionSummary = dropDownSummary(placeholder);
     return <React.Fragment>
-      <div className={'smart-selection-summary'}>
+      <div className="smart-selection-summary">
         {selectionSummary}
       </div>
-      <div className={'smart-selection-indicator'}>
+      <div className="smart-selection-indicator">
         {setTogglerIcon()}
       </div>
-    </React.Fragment>;
+           </React.Fragment>;
   }
 
   renderDropDown() {
@@ -207,17 +211,20 @@ class Dropdown extends SelectionFormElement {
       showSelectAllNone =false,
       ListItem: ListItem = ListMenuItem,
       placeholder,
-      selectAllNoneContainer: selectAllNoneContainer =this.getSelectAllNone,
       setPopUpPositon: setPopUpPositon = this.popUpPosition,
       filterFunc: filterFunc = this.filter,
       listMaxHeight='300px'} = this.props;
+
+
+    let {selectAllNoneContainer: selectAllNoneContainer = this.getSelectAllNone} = this.props;
+    selectAllNoneContainer = selectAllNoneContainer.bind(this);
 
     let filteredOptions = filterFunc(options, this.state.query);
     if (filteredOptions.length > 500 && this.state.query === '') {
       filteredOptions = [];
     }
-    return <OuterGrid className={'drop-down-widgets'}>
-      <div className={'smart-select-control'} onClick={this.handleClick}>
+    return <OuterGrid className="drop-down-widgets">
+      <div className="smart-select-control" onClick={this.handleClick}>
         {this.renderButton()}
       </div>
       <Popover
@@ -240,7 +247,7 @@ class Dropdown extends SelectionFormElement {
             </div>
           </ShowIfPropTrue>
           <ShowIfPropTrue prop={showSelectAllNone}>
-              {this.getSelectAllNone()}
+              {selectAllNoneContainer()}
           </ShowIfPropTrue>
           <div onClick={this.clickHandler.bind(this)}>
             <SmartList ListItem={ListItem}
@@ -253,7 +260,7 @@ class Dropdown extends SelectionFormElement {
         </DropDownList>
       </Popover>
       <RenderInlineError errors={errors}/>
-    </OuterGrid>;
+           </OuterGrid>;
   }
 
   selectAll=()=>{
@@ -269,9 +276,9 @@ class Dropdown extends SelectionFormElement {
 
   getSelectAllNone(){
     return <div>
-        <Button type={'button'} variant="flat" color="primary" onClick={this.selectAll}>Select All</Button>
-		<Button type={'button'} variant="flat" color="primary" onClick={this.selectNone}>None</Button>
-    </div>
+        <Button type="button" variant="flat" color="primary" onClick={this.selectAll}>Select All</Button>
+		<Button type="button" variant="flat" color="primary" onClick={this.selectNone}>None</Button>
+           </div>
   }
 
   render() {
@@ -283,7 +290,7 @@ class Dropdown extends SelectionFormElement {
       return <FormControl component="fieldset" error={errors.length > 0} className={formClasses}>
         <FormLabel component="legend">{this.props.label}</FormLabel>
         {this.renderDropDown()}
-      </FormControl>;
+             </FormControl>;
     }
     else {
       return this.renderDropDown();
