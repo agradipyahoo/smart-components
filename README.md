@@ -17,7 +17,7 @@ Smart components are react ui components which built on Material Components.
 
 Using the above generic we can model any interaction, we can compose and build composite Components.
 
-Please checkout [documentation](https://gecgithub01.walmart.com/pages/a0s01j1/smart-components/)
+Please checkout [documentation](https://github.com/agradipyahoo/smart-components/)
 
 ```javascript
 npm install -s smart-components
